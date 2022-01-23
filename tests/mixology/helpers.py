@@ -59,9 +59,12 @@ def check_solver_result(
                 assert solver.solution.attempted_solutions == tries
 
             return
-
         raise
-
+    except AssertionError as e:
+        if error:
+            assert str(e) == error
+            return
+        raise
     packages = {}
     for package in solution.packages:
         packages[package.name] = str(package.version)
